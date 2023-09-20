@@ -14,5 +14,14 @@ func main() {
 
 	var option int
 	fmt.Scan(&option)
-	fmt.Println(option)
+
+	if option == 1 {
+		fmt.Println("Start monitoring")
+	} else if option == 2 {
+		fmt.Println("Retrieving logs...")
+	} else if option == 3 {
+		fmt.Println("Goodbye")
+	} else {
+		fmt.Println("Unknown command...")
+	}
 }
