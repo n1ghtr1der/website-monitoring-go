@@ -1,9 +1,13 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"io"
 	"net/http" //biblioteca responsável por fzer
 	"os"       //essa biblioteca comunica a aplicação com o sistema operacional
+	"strconv"
+	"strings"
 	"time"
 )
 
@@ -53,7 +57,7 @@ func readOption() int {
 
 func startMonitoring() {
 	fmt.Println("Start monitoring")
-	domains := []string{"http://app.eclipselocadora.com.br", "http://qacademico.ifce.edu.br", "https://alura.com.br"}
+	domains := readWebsitesFileList()
 
 	for i := 0; i < monitoring; i++ {
 		for i, domain := range domains {
@@ -66,11 +70,58 @@ func startMonitoring() {
 }
 
 func testSite(domain string) {
-	response, _ := http.Get(domain)
+	response, error := http.Get(domain)
+
+	if error != nil {
+		fmt.Println("An error has ocurred:", error)
+	}
 
 	if response.StatusCode == 200 {
 		fmt.Println("Website:", domain, "successfuly loaded!")
+		registerLogs(domain, true)
 	} else {
 		fmt.Println("Website:", domain, "not reachable. Code:", response.StatusCode)
+		registerLogs(domain, false)
 	}
+}
+
+func readWebsitesFileList() []string {
+	var websites []string
+
+	file, error := os.Open("websites.txt")
+
+	if error != nil {
+		fmt.Println("An error has ocurred:", error)
+	}
+
+	reader := bufio.NewReader(file)
+
+	for {
+		line, error := reader.ReadString('\n')
+		line = strings.TrimSpace(line)
+		fmt.Println(line)
+
+		websites = append(websites, line)
+
+		if error == io.EOF {
+			break
+		}
+	}
+
+	file.Close()
+
+	return websites
+
+}
+
+func registerLogs(domain string, status bool) {
+	file, error := os.OpenFile("logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+
+	if error != nil {
+		fmt.Println("An error has ocurred:", error)
+	}
+
+	file.WriteString(domain + " - online:" + strconv.FormatBool(status) + "\n")
+
+	file.Close()
 }
