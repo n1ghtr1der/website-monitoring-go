@@ -49,12 +49,21 @@ func readOption() int {
 
 func startMonitoring() {
 	fmt.Println("Start monitoring")
-	site := "http://qacademico.ifce.edu.br/"
-	response, _ := http.Get(site) //o _ significa que o segundo valor retornado pela função será ignorado
+	domains := []string{"http://app.eclipselocadora.com.br", "http://qacademico.ifce.edu.br", "https://alura.com.br"}
+
+	for i, domain := range domains {
+		websiteNum := i + 1
+		fmt.Println("Testing website", websiteNum, ":", domain)
+		testSite(domain)
+	}
+}
+
+func testSite(domain string) {
+	response, _ := http.Get(domain)
 
 	if response.StatusCode == 200 {
-		fmt.Println("Site:", site, "successfuly loaded!")
+		fmt.Println("Website:", domain, "successfuly loaded!")
 	} else {
-		fmt.Println("Site:", site, "not reachable. Code:", response.StatusCode)
+		fmt.Println("Website:", domain, "not reachable. Code:", response.StatusCode)
 	}
 }
