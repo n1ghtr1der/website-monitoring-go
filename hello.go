@@ -4,7 +4,11 @@ import (
 	"fmt"
 	"net/http" //biblioteca responsável por fzer
 	"os"       //essa biblioteca comunica a aplicação com o sistema operacional
+	"time"
 )
+
+const monitoring = 5
+const delaySeconds = 3
 
 func main() {
 
@@ -51,10 +55,13 @@ func startMonitoring() {
 	fmt.Println("Start monitoring")
 	domains := []string{"http://app.eclipselocadora.com.br", "http://qacademico.ifce.edu.br", "https://alura.com.br"}
 
-	for i, domain := range domains {
-		websiteNum := i + 1
-		fmt.Println("Testing website", websiteNum, ":", domain)
-		testSite(domain)
+	for i := 0; i < monitoring; i++ {
+		for i, domain := range domains {
+			websiteNum := i + 1
+			fmt.Println("Testing website", websiteNum, ":", domain)
+			testSite(domain)
+		}
+		time.Sleep(delaySeconds * time.Second)
 	}
 }
 
