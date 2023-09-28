@@ -26,7 +26,7 @@ func main() {
 		case 1:
 			startMonitoring()
 		case 2:
-			fmt.Println("Retrieving data...")
+			printLogs()
 		case 3:
 			fmt.Println("Goodbye")
 			os.Exit(0) // sai do programa sem erros
@@ -121,7 +121,20 @@ func registerLogs(domain string, status bool) {
 		fmt.Println("An error has ocurred:", error)
 	}
 
-	file.WriteString(domain + " - online:" + strconv.FormatBool(status) + "\n")
+	file.WriteString(time.Now().Format("02/01/2006 15:04:05") + " - " + domain + " - online:" + strconv.FormatBool(status) + "\n") //golang time format
 
 	file.Close()
+}
+
+func printLogs() {
+	fmt.Println("Retrieving Data...")
+	time.Sleep(1 * time.Second)
+	file, error := os.ReadFile("logs.txt")
+
+	if error != nil {
+		fmt.Println(error)
+	}
+
+	fmt.Println(string(file))
+
 }

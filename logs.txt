@@ -1,0 +1,10 @@
+25/09/2023 11:42:23 - http://app.eclipselocadora.com.br - online:true
+25/09/2023 11:42:23 - http://qacademico.ifce.edu.br - online:true
+25/09/2023 11:42:27 - http://app.eclipselocadora.com.br - online:true
+25/09/2023 11:42:27 - http://qacademico.ifce.edu.br - online:true
+25/09/2023 11:42:31 - http://app.eclipselocadora.com.br - online:true
+25/09/2023 11:42:32 - http://qacademico.ifce.edu.br - online:true
+25/09/2023 11:42:35 - http://app.eclipselocadora.com.br - online:true
+25/09/2023 11:42:36 - http://qacademico.ifce.edu.br - online:true
+25/09/2023 11:42:39 - http://app.eclipselocadora.com.br - online:true
+25/09/2023 11:42:40 - http://qacademico.ifce.edu.br - online:true
