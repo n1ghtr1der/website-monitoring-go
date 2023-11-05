@@ -1,2 +1,3 @@
-http://app.eclipselocadora.com.br
-http://qacademico.ifce.edu.br
+https://qacademico.ifce.edu.br
+https://pomofocus.io
+https://go.dev/doc/install
